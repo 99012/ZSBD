@@ -1,0 +1,47 @@
+1)utworzenie employees===========
+CREATE TABLE employees (employee_id  NUMBER(6) PRIMARY KEY, first_name VARCHAR(40) NOT NULL,
+last_name VARCHAR(40) NOT NULL, email VARCHAR(40), phone_number NUMBER(9) NOT NULL, 
+hire_date DATE NOT NULL, job_id NUMBER(6), salary NUMBER(8,2) NOT NULL,
+commission_pct NUMBER(4), manager_id NUMBER(4) NOT NULL, department_id NUMBER(4) NOT NULL,
+FOREIGN KEY(manager_id) REFERENCES employees (employee_id) ON DELETE SET NULL,
+FOREIGN KEY(job_id) REFERENCES jobs (job_id) ON DELETE SET NULL)
+=================================
+
+2)utworzenie jobs================
+CREATE TABLE jobs (job_id  NUMBER(6) PRIMARY KEY, job_title VARCHAR(40) NOT NULL,
+min_salary INT NOT NULL, max_salary INT NOT NULL)
+=================================
+
+3)utworzenie job_history=========
+CREATE TABLE job_history (employee_id  NUMBER(6) PRIMARY KEY, start_date DATE NOT NULL,
+end_date DATE, job_id INT NOT NULL, department_id INT NOT NULL,
+FOREIGN KEY(job_id) REFERENCES jobs (job_id) ON DELETE SET NULL,
+FOREIGN KEY(employee_id) REFERENCES employees (employee_id) ON DELETE SET NULL)
+=================================
+
+7)utworzenie departments=========
+CREATE TABLE departments (department_id NUMBER(6) PRIMARY KEY, department_name VARCHAR(20) NOT NULL,
+manager_id NUMBER(6) NOT NULL, location_id INT NOT NULL,
+FOREIGN KEY(location_id) REFERENCES locations (location_id) ON DELETE SET NULL)
+=================================
+
+6)utworzenie locations===========
+CREATE TABLE locations (location_id  NUMBER(6) PRIMARY KEY, street_address VARCHAR(20) NOT NULL,
+postal_code VARCHAR(10) NOT NULL, city VARCHAR(20) NOT NULL,
+state_province VARCHAR(20) NOT NULL, country_id  NUMBER(6), 
+FOREIGN KEY(country_id) REFERENCES countries (country_id) ON DELETE SET NULL)
+=================================
+
+5)utworzenie countries===========
+CREATE TABLE countries (country_id  NUMBER(6) PRIMARY KEY, country_name VARCHAR(20) NOT NULL,
+region_id  NUMBER(6), 
+FOREIGN KEY(region_id) REFERENCES regions (region_id) ON DELETE SET NULL)
+=================================
+
+4)utworzenie regions=============
+CREATE TABLE regions (region_id  NUMBER(6) PRIMARY KEY, region_name VARCHAR(20) NOT NULL)
+=================================
+
+*************************referencje*********************************
+
+********************************************************************
